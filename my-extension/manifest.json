@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "Job-Assis",
+    "version": "1.0",
+    "description": "Scrapes job descriptions and helps in identifying suitability",
+    "permissions": ["scripting", "activeTab"],
+    "host_permissions": ["<all_urls>","https://www.linkedin.com/*"],
+    "action": {
+      "default_title": "Track Clicks"
+    },
+    "background": {
+    "service_worker": "background.js"
+  },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ]
+  }

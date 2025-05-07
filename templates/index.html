@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>📡 Live Scraped Job Data</h1>
+    <p>Find if your skill is asset to the company!</p>
+    <br>
+    <label>Enter the skill you want to search for</label>
+    <input type="text" placeholder="e.g, Python, Java.." id="custom-skill"/>
+    <div id="jobs"></div>
+  
+    <script>
+      const socket = io();
+  
+      socket.on("new_data", (data) => {
+        const container = document.getElementById("jobs");
+        const inputElement = document.getElementById("custom-skill");
+        const job = document.createElement("div");
+        var found_custom_skill = "No"
+        if (data.JD.includes(inputElement.value)){
+          found_custom_skill = "Yes"
+        }
+        job.className = "job";
+        job.innerHTML = `
+        <hr></hr>
+        <h3><strong>Role:</strong> ${data.role}</h3>
+        </br>
+        <div><strong>Experience:</strong> ${data.exp}</div>
+          <div><strong>Contains Python:</strong> ${data.found_python}</div>
+          <div><strong>Contains Django:</strong> ${data.found_django}</div>
+          <div><strong>Contains ${inputElement.value}:</strong> ${found_custom_skill}</div>
+          </br>
+          </br>
+        `;
+        container.prepend(job); // show newest on top
+      });
+    </script>
+</body>
+</html>
