@@ -15,7 +15,7 @@ document.addEventListener("click", (e) => {
   if (JDelement && jobTitleElement) {
     const JDText = JDelement.innerText;
     const RoleText = jobTitleElement.textContent;
-    fetch("http://localhost:5000/scrape", {
+    fetch("https://job-assis.onrender.com//scrape", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
